@@ -2,31 +2,43 @@ package com.web.APIRest.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-public class User implements Serializable{
+@Entity
+public class Usuario implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
+	@Column
 	private String nome;
+	
+	@Column(unique = true)
 	private String email;
 	
-	public User() {
+	public Usuario() {
 		
 	}
 
-	public User(int id, String nome, String email) {
+	public Usuario(Integer id, String nome, String email) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -62,7 +74,7 @@ public class User implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Usuario other = (Usuario) obj;
 		if (id != other.id)
 			return false;
 		return true;

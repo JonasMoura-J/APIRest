@@ -1,28 +1,27 @@
 package com.web.APIRest.controllers;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.web.APIRest.domain.User;
+import com.web.APIRest.domain.Usuario;
+import com.web.APIRest.repositories.UserRepository;
 
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
 	
+	@Autowired
+	private UserRepository repository;
+	
 	@GetMapping
-	public ResponseEntity <List<User>> findAll() {
-		User jonas = new User(1, "Jonas", "Jonas@gmail");
-		User maria = new User(2, "Maria", "Maria@gmail");
+	public ResponseEntity <List<Usuario>> findAll() {
 		
-		List<User> list = new ArrayList<>();
-		
-		list.addAll(Arrays.asList(jonas, maria));
+		List<Usuario> list = repository.findAll();
 		
 		return ResponseEntity.ok().body(list);
 		
